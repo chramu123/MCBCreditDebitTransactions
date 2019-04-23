@@ -1,0 +1,86 @@
+<xs:schema xmlns:tns="http://service.mcb.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://service.mcb.com/" version="1.0">
+
+  <xs:element name="getDebitCreditCardInfo" type="tns:getDebitCreditCardInfo"/>
+
+  <xs:element name="getDebitCreditCardInfoResponse" type="tns:getDebitCreditCardInfoResponse"/>
+
+  <xs:complexType name="getDebitCreditCardInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ownerOrHolder" type="tns:ownerOrHolder"/>
+      <xs:element minOccurs="0" name="cardNumber" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ownerOrHolder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cbCustNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="filterFor" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getDebitCreditCardInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:getDebitCreditCardResp"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getDebitCreditCardResp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cardProdList" type="tns:cardProdList"/>
+      <xs:element minOccurs="0" name="errorMsg" type="xs:string"/>
+      <xs:element minOccurs="0" name="returnCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cardProdList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cardProdListItem" type="tns:cardProdListItem"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cardProdListItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="activationFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardEmbossedName" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardExpiryDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardHolderCIR" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardHolderName" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardHolderType" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardNetworkCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardNetworkDesc" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardNumberMasked" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardProdCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardProdDesc" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardProdType" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardStatusCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardStatusDesc" type="xs:string"/>
+      <xs:element minOccurs="0" name="cardValidStartDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccAdminStatusCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccAdminStatusDesc" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccAvailableAmt" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccBalance" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccCCY" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccCardAcctNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccCardAcctType" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccCreditLimit" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccLastStatDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccMinPayAmtLastStat" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccMinPayAmtToday" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccPayDueDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccPendingAmt" type="xs:string"/>
+      <xs:element minOccurs="0" name="ccPrimShadowAcctNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="contactlessFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="dcPrimMaskedCardNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="deliveryCardFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="foreignTransactionFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="ownerCIR" type="xs:string"/>
+      <xs:element minOccurs="0" name="ownerName" type="xs:string"/>
+      <xs:element minOccurs="0" name="rbAcctCCY" type="xs:string"/>
+      <xs:element minOccurs="0" name="rbAcctNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="rbAcctSeq" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopListMarker" type="xs:string"/>
+      <xs:element minOccurs="0" name="eCommerceFlag" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

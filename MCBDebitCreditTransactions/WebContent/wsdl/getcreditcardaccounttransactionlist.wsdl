@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GetCreditCardAccountTransactionListImplService"
+	targetNamespace="http://service.mcb.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://service.mcb.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:jms="http://cxf.apache.org/transports/jms">
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://service.mcb.com/"
+				schemaLocation="getcreditcardaccounttransactionlist_schema1.xsd" />
+		</schema>
+	</wsdl:types>
+	<wsdl:message name="getCCAcctTranListResponse">
+		<wsdl:part name="parameters" element="tns:getCCAcctTranListResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCCAcctTranList">
+		<wsdl:part name="parameters" element="tns:getCCAcctTranList">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="GetCreditCardAccountTransactionList">
+		<wsdl:operation name="getCCAcctTranList">
+			<wsdl:input name="getCCAcctTranList" message="tns:getCCAcctTranList">
+			</wsdl:input>
+			<wsdl:output name="getCCAcctTranListResponse" message="tns:getCCAcctTranListResponse">
+			</wsdl:output>
+
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding
+		name="GetCreditCardAccountTransactionListImplServiceSoapBinding" type="tns:GetCreditCardAccountTransactionList">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getCCAcctTranList">
+			<soap:operation soapAction="urn:GetCCAcctTranList"
+				style="document" />
+			<wsdl:input name="getCCAcctTranList">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getCCAcctTranListResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="GetCreditCardAccountTransactionListImplService">
+		<wsdl:port name="GetCreditCardAccountTransactionListImplPort"
+			binding="tns:GetCreditCardAccountTransactionListImplServiceSoapBinding">
+			<soap:address
+				location="http://localhost:8080/MCBDebitCreditTransactions/services/GetCreditCardAccountTransactionListImplPort" />
+		</wsdl:port>
+	</wsdl:service>
+	<wsdl:binding
+		name="GetCreditCardAccountTransactionListImplServiceJMSBinding" type="tns:GetCreditCardAccountTransactionList">
+		<soap:binding style="document"
+			transport="http://cxf.apache.org/transports/jms" />
+		<wsdl:operation name="getCCAcctTranList">
+			<soap:operation soapAction="urn:GetCCAcctTranList"
+				style="document" />
+			<wsdl:input name="getCCAcctTranList">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getCCAcctTranListResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="GetCreditCardAccountTransactionListJMSImplService">
+		<wsdl:port name="GetCreditCardAccountTransactionListJMSImplPort"
+			binding="tns:GetCreditCardAccountTransactionListImplServiceJMSBinding">
+			<jms:address destinationStyle="queue"
+				jndiConnectionFactoryName="wsQCF" jndiDestinationName="requestQueue">
+				<jms:JMSNamingProperty name="java.naming.factory.initial"
+					value="com.sun.jndi.fscontext.context.RefFSContextFactory" />
+				<jms:JMSNamingProperty name="java.naming.provider.url"
+					value="file:/C:/Ramu/JBoss-Proj/code/jboss-eap-7.1.0/jboss-eap-7.1/standalone/configuration/JNDIDirectory/" />
+			</jms:address>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

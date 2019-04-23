@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+
+	<jaxws:endpoint xmlns:tns="http://service.mcb.com/" id="getdebitcreditcardinfo"
+		implementor="com.mcb.service.GetDebitCreditCardInfoImpl" wsdlLocation="wsdl/getdebitcreditcardinfo.wsdl"
+		endpointName="tns:GetDebitCreditCardInfoImplPort" serviceName="tns:GetDebitCreditCardInfoImplService"
+		address="/GetDebitCreditCardInfoImplPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://service.mcb.com/"
+		id="getcreditcardaccounttransactionlist" implementor="com.mcb.service.GetCreditCardAccountTransactionListImpl"
+		wsdlLocation="wsdl/getcreditcardaccounttransactionlist.wsdl"
+		endpointName="tns:GetCreditCardAccountTransactionListImplPort"
+		serviceName="tns:GetCreditCardAccountTransactionListImplService"
+		address="/GetCreditCardAccountTransactionListImplPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<bean id="wsQCF" class="com.ibm.mq.jms.MQConnectionFactory">
+		<!-- <property name="brokerURL" value="tcp://192.168.1.45:1421" /> -->
+		<property name="hostName">
+			<value>192.168.2.152</value>
+		</property>
+
+		<property name="port">
+			<value>1422</value>
+		</property>
+
+		<property name="queueManager">
+			<value>ICPSQM</value>
+		</property>
+
+		<property name="channel">
+			<value>SYSTEM.DEF.SVRCONN</value>
+		</property>
+
+		<property name="transportType">
+			<value>1</value>
+		</property>
+
+		<property name="clientReconnectOptions" value="0" />
+
+		<property name="clientReconnectTimeout" value="2" />
+	</bean>
+
+
+	<bean id="requestQueue" class="com.ibm.mq.jms.MQQueue">
+	</bean>
+	<bean id="jmsConfig" class="org.apache.cxf.transport.jms.JMSConfiguration">
+		<property name="connectionFactory" ref="wsQCF" />
+		<property name="targetDestination" value="WS.REQUESTQ" />
+
+
+		<property name="concurrentConsumers" value="10" />
+
+	</bean>
+	<jaxws:endpoint xmlns:tns="http://service.mcb.com/"
+		id="getcreditcardaccounttransactionjmslist" implementor="com.mcb.service.GetCreditCardAccountTransactionListImpl"
+		wsdlLocation="wsdl/getcreditcardaccounttransactionlist.wsdl"
+		endpointName="tns:GetCreditCardAccountTransactionListJMSImplPort"
+		serviceName="tns:GetCreditCardAccountTransactionListJMSImplService"
+		address="jms://">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+			<bean class="org.apache.cxf.transport.jms.JMSConfigFeature">
+				<property name="jmsConfig" ref="jmsConfig" />
+			</bean>
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://service.mcb.com/" id="getdebitcreditcardinfojms"
+		implementor="com.mcb.service.GetDebitCreditCardInfoImpl" wsdlLocation="wsdl/getdebitcreditcardinfo.wsdl"
+		endpointName="tns:GetDebitCreditCardInfoJMSImplPort" serviceName="tns:GetDebitCreditCardInfoImplServiceJMSBinding"
+		address="jms://">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+			<bean class="org.apache.cxf.transport.jms.JMSConfigFeature">
+				<property name="jmsConfig" ref="jmsConfig" />
+			</bean>
+		</jaxws:features>
+	</jaxws:endpoint>
+</beans>

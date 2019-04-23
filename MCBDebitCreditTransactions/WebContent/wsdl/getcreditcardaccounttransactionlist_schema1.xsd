@@ -1,0 +1,77 @@
+<xs:schema xmlns:tns="http://service.mcb.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified" targetNamespace="http://service.mcb.com/"
+	version="1.0">
+
+	<xs:element name="getCCAcctTranList" type="tns:getCCAcctTranList" />
+
+	<xs:element name="getCCAcctTranListResponse" type="tns:getCCAcctTranListResponse" />
+
+	<xs:complexType name="getCCAcctTranList">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="shadowAccntNum" type="xs:string" /> 
+			<xs:element minOccurs="0" name="statementCycle" type="xs:string" />
+			<xs:element minOccurs="0" name="tranStatus" type="xs:string" />
+			<xs:element minOccurs="0" name="sortOrder" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getCCAcctTranListResponse">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="return" type="tns:getCCAcctTranListResp" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getCCAcctTranListResp">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="errorMsg" type="xs:string" />
+			<xs:element minOccurs="0" name="returnCode" type="xs:string" />
+			<xs:element minOccurs="0" name="shadowAcct" type="tns:shadowAcct" />
+			<xs:element minOccurs="0" name="tranStatus" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0"
+				name="transRecordList" nillable="true" type="tns:tranRecord" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="shadowAcct">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="billingCurrency" type="xs:string" />
+			<xs:element minOccurs="0" name="priShadowAccountNum" type="xs:string" />
+			<xs:element minOccurs="0" name="shadowAccountNum" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="tranRecord">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="billingAmount" type="xs:string" />
+			<xs:element minOccurs="0" name="cardNumberMasked" type="tns:cardNumberMasked" />
+			<xs:element minOccurs="0" name="merchant" type="tns:merchant" />
+			<xs:element minOccurs="0" name="microfilmRefNum" type="xs:string" />
+			<xs:element minOccurs="0" name="processingDate" type="xs:string" />
+			<xs:element minOccurs="0" name="revarsalFlag" type="xs:string" />
+			<xs:element minOccurs="0" name="statementDate" type="xs:string" />
+			<xs:element minOccurs="0" name="transactionAmount" type="xs:string" />
+			<xs:element minOccurs="0" name="transactionCode" type="xs:string" />
+			<xs:element minOccurs="0" name="transactionCurrency" type="xs:string" />
+			<xs:element minOccurs="0" name="transactionDate" type="xs:string" />
+			<xs:element minOccurs="0" name="transactionSign" type="xs:string" />
+			<xs:element minOccurs="0" name="transactionWording" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="cardNumberMasked">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="first_6" type="xs:string" />
+			<xs:element minOccurs="0" name="last_4" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="merchant">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="acronym" type="xs:string" />
+			<xs:element minOccurs="0" name="cityName" type="xs:string" />
+			<xs:element minOccurs="0" name="countryCode" type="xs:string" />
+			<xs:element minOccurs="0" name="mcc" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
